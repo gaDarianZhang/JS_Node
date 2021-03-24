@@ -1,4 +1,5 @@
 /*
+* 流式读和写的open事件是被createReadStream和createWriteStream触发的（貌似）
 * fs.createReadStream(path[, options])
 *     --path:尧都区的文件路径+文件名+后缀
 *     --options:

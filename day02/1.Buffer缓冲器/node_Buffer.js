@@ -19,7 +19,7 @@
 *       .....
 * */
 
-//创建一个Buffer的实例对象--------性能特别差------1.在堆里开辟空间。2.清理
+//创建一个Buffer的实例对象--------性能特别差------1.在堆里开辟空间（包括从来没被使用过的以及使用过但被回收为垃圾的空间）。2.多了个清理的步骤
 let buf = new Buffer(10)
 console.log(buf)
 
@@ -34,10 +34,15 @@ console.log(buf2)
 * */
 let buf3 = Buffer.allocUnsafe(10)
 console.log(buf3)
+console.log(buf3.toString())
 
 // 将数据存入一个Buffer实例
 let buf4 = Buffer.from('hello atguigu')
+console.log(buf4.toString())
 console.log(buf4)
+
+let buf5 = Buffer.from("中文");
+console.log(buf5);
 /*
 * 1.输出的为什么不是我们曾经存入的字符串？用户存储的不一定是字符串，可能是媒体类型的文件
 * 2.如何能够让输出的东西是字符串(我们能看懂的)？toString()

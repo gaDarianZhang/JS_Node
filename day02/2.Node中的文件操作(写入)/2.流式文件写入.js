@@ -3,11 +3,11 @@
 *   fs.createWriteStream(path[, options])
 *       --path:要写入文件的路径+文件名+文件后缀
 *       --options：配置对象（可选参数）
-*           --flags:
+*           --flags:！！！！！！！这个流生命期间都是追加的，a,w等用于指定初次写入这个文件的时候是追加还是重新写入！！！！
 *           --encoding :
 *           --fd : 文件统一标识符，linux下文件标识符
 *           --mode :
-*           --autoClose : 自动关闭 --- 文件，默认值：true
+*           --autoClose : 自动关闭 --- 文件，默认值：true。自动关闭的是文件。ws.end/close关闭的是stream
 *           --emitClose : 关闭 --- 文件，默认值：false
 *           --start : 写入文件的起始位置(偏移量)
 * */
