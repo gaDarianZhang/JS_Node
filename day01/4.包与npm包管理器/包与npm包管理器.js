@@ -56,7 +56,7 @@
 
             3.npm view xxxxx version :查看npm仓库中xxxx包的最新版本
 
-            4.npm ls xxxx :查看我们所安装的xxxx包的版本
+            4.npm ls xxxx :查看我们所安装的xxxx包的版本，不要被package.json里边的版本号给坑了。
 
        五、【关于版本号的说明】：
             "^3.x.x" ：锁定大版本，以后安装包的时候，保证包是3.x.x版本，x默认取最新的。
