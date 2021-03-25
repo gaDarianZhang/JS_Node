@@ -1,11 +1,11 @@
 //引入mongoose
-let mongoose = require('mongoose')
+let mongoose = require("mongoose");
 mongoose.set('useCreateIndex',true) //使用一个新的索引创建器
 
 //1.连接数据库
-mongoose.connect('mongodb://localhost:27017/demo',{
-  useNewUrlParser: true, //使用一个新的URL解析器，用于解决一些安全性问题。
-  useUnifiedTopology: true //使用一个统一的新的拓扑结构。
+mongoose.connect("mongodb://localhost:27017/test",{
+  useNewUrlParser:true,
+  useUnifiedTopology:true
 })
 
 //2.绑定数据库连接的监听
