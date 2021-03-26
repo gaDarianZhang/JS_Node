@@ -1,6 +1,6 @@
 # Node.js
 
-![image-20210324224517972](Node笔记.assets/image-20210324224517972.png)
+![image-20210324224517972](2-Node笔记.assets/image-20210324224517972.png)
 
 ## 优缺点
 
