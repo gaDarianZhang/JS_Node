@@ -3,7 +3,7 @@ let mongoose = require("mongoose");
 mongoose.set('useCreateIndex',true) //使用一个新的索引创建器
 
 //1.连接数据库
-mongoose.connect("mongodb://localhost:27017/test",{
+mongoose.connect("mongodb://localhost:27017/demo",{
   useNewUrlParser:true,
   useUnifiedTopology:true
 })
@@ -58,16 +58,16 @@ mongoose.connection.on('open',function (err) {
 
     //新增操作 --- C
     stuModel.create({
-      stu_id:'888',
-      name:'强',
-      age:'42',
+      stu_id:'001',
+      name:'李欣',
+      age:13,
       sex:'男',
       hobby:['女','打代码','打篮球'], //限制爱好只能为数组，数组中的每一项必须为字符串
       info:'一个风一样的男子', //接收所有类型
     },function(err,data){
         if (!err) console.log(data)
         else console.log(err)
-    })
+    });
 
     //查询 --- R
     /*find方法：
@@ -78,7 +78,7 @@ mongoose.connection.on('open',function (err) {
       if (!err) console.log(data)
       else console.log(err)
     })*/
-    /*find方法：
+    /*findOne方法：
         1.若有结果，返回的是一个对象
         2.若没有结果，返回一个null
     */
