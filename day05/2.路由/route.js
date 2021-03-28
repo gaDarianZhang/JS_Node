@@ -1,20 +1,22 @@
 let express = require('express')
 
 let app = express()
+// app.disable("x-powered-by")
 
 //request和response都有什么API？
 /*
   1.request对象：
-      request.query	获取查询字符串参数（query参数），拿到的是一个对象
-      request.params 获取get请求参数路由的参数，拿到的是一个对象
-      request.body	获取post请求体参数，拿到的是一个对象（不可以直接用，要借助一个中间件）
+      request.query	获取查询字符串参数（query参数）【要么来自get请求，要么设定使用post请求，
+          但uri里边人工添加了查询字符串】，拿到的是一个对象。该属性在get路由中有值。
+      request.params 获取get请求【参数路由】的参数，拿到的是一个对象!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      request.body	获取【post请求】体参数，拿到的是一个对象（不可以直接用，要借助一个中间件）!!!!!!!!!!!!!!!!!!!!!!
       request.get(xxxx)	获取请求头中指定key对应的value。
   2.response对象：
       response.send()	给浏览器做出一个响应
       response.end()	给浏览器做出一个响应（不会自动追加响应头）
       response.download()	告诉浏览器下载一个文件，可以传递相对路径
       response.sendFile()	给浏览器发送一个文件 备注：必须传递绝对路径
-      response.redirect()	重定向到一个新的地址（url）
+      response.redirect()	重定向到一个新的地址（url）,！！！!!!!!!!!!!!!!!客户端重定向！！！!!!!!!!!!!!!!!!!!!!!
       response.set(key,value)	自定义响应头内容
       response.get(key)	获取响应头指定key对应的value  很少使用
       response.status(code)	设置响应状态码
@@ -29,7 +31,7 @@ app.get('/',function (request,response) {
   //.log(request.query)
   //console.log(request.get('Host'))
   //console.log(request.get('Referer'))
-  response.send('250') //send方法里不能传入纯数字，express会当成状态码
+  response.send('250') //send方法里不能传入纯数字，express会当成状态码!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 })
 
 //根路由
@@ -65,7 +67,7 @@ app.get('/demo/test',function (request,response) {
   response.send('我是demo/test路由返回的数据')
 })
 
-//参数路由---可以动态接收参数
+//参数路由---可以动态接收参数!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 app.get('/meishi/:id',function (request,response) {
   console.log(request.params);
   let {id} = request.params

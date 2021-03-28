@@ -2,9 +2,9 @@
 const express = require('express')
 
 //1.创建app服务对象
-const app = express()
+const app = express();
 //禁止服务器返回X-Powered-By
-app.disable('x-powered-by')
+app.disable('x-powered-by')//!!!!!!!!!!!!!!!!!!!
 
 //2.配置路由 ------ 对请求的url进行分类，服务器根据分类决定交给谁去处理。
 /*
@@ -16,7 +16,7 @@ app.disable('x-powered-by')
   (4).该URL:http://locahost:3000/meishi 中meishi，叫什么？ 1.URI名字 2.虚拟路径名字
 */
 //根路由
-app.get('/',function (request,response) {
+app.get('/', function (request, response) {
   /*
   * 问题：得是什么样的请求，能交给这个回调函数处理？
   *       1.请求方式必须为GET
@@ -24,11 +24,13 @@ app.get('/',function (request,response) {
   * */
   console.log(request.query)
   console.log(request.url)
+  console.log(request.params);//拿到参数路由的参数，是一个对象,在这里就是空的了
+  console.log(request.get("Cache-Control"));
   response.send('ok')
 })
 
 //一级路由
-app.get('/meishi',function (request,response) {
+app.get('/meishi', function (request, response) {
   /*
   * 问题：得是什么样的请求，能交给这个回调函数处理？
   *       1.请求方式必须为GET
@@ -38,17 +40,20 @@ app.get('/meishi',function (request,response) {
 })
 
 //二级路由
-app.get('/meishi/c17',function (request,response) {
+app.get('/meishi/c17', function (request, response) {
   response.send('我是美食-火锅页面')
 })
 
 //根路由
-app.post('/',function (request,response) {
+app.post('/', function (request, response) {
   response.send('你发的是post请求')
+  console.log(request.query);  //查询字符串对象
+  console.log(request.get("Cache-Control"));
+  
 })
 
 //3.指定服务器运行的端口号(绑定端口监听)
-app.listen(3000,function (err) {
+app.listen(3000, function (err) {
   if (!err) console.log('服务器启动成功了')
   else console.log(err)
 })
