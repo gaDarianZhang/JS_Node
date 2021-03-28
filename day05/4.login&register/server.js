@@ -15,17 +15,18 @@ app.use(express.urlencoded({extended:true}))
 
 //逻辑：如果数据库连接成功，随后立即启动服务器，在整个过程中，无论多少次请求，数据库只连接一次。
 db(()=>{
-  //用于展示登录界面的路由，无其他任何逻辑 ----- UI路由
+  //用于展示登录界面的路由，无其他任何逻辑 ----- UI路由【这是直接输网址登录方式】
   app.get('/login',(req,res)=>{
     res.sendFile(__dirname+'/public/login.html')
   })
 
-  //用于展示注册界面的路由，无其他任何逻辑 ----- UI路由
+  //用于展示注册界面的路由，无其他任何逻辑 ----- UI路由【这是直接输网址登录方式】
   app.get('/register',(req,res)=>{
     res.sendFile(__dirname+'/public/register.html')
   })
 
   //用于处理用户的注册请求，有很多业务逻辑(校验数据的有效性等) -------- 业务路由
+  //这里还是路由到register，不过是post请求。当然，如果表单里边action设计为其他的路由名字，这里的名称就可以改为其他的。
   app.post('/register',(req,res)=>{
     /*
      { email: 'kobe@qq.com',
