@@ -27,7 +27,7 @@ let app = express()
 //3.防盗链
 
 //根路由
-app.get('/',function (request,response) {
+app.get('/', function (request, response) {
   //.log(request.query)
   //console.log(request.get('Host'))
   //console.log(request.get('Referer'))
@@ -35,13 +35,13 @@ app.get('/',function (request,response) {
 })
 
 //根路由
-app.post('/',function (request,response) {
+app.post('/', function (request, response) {
   console.log(request.body)
   response.send('我是根路由返回的数据--post')
 })
 
 //一级路由
-app.get('/demo',function (request,response) {
+app.get('/demo', function (request, response) {
   /*
   * 什么叫做服务器给浏览器响应了？
   *   1.服务器给浏览器一段文字
@@ -63,19 +63,19 @@ app.get('/demo',function (request,response) {
 })
 
 //二级路由
-app.get('/demo/test',function (request,response) {
+app.get('/demo/test', function (request, response) {
   response.send('我是demo/test路由返回的数据')
 })
 
 //参数路由---可以动态接收参数!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-app.get('/meishi/:id',function (request,response) {
+app.get('/meishi/:id', function (request, response) {
   console.log(request.params);
-  let {id} = request.params
+  let { id } = request.params
   response.send(`我是变化为${id}的商家`)
 })
 
 
-app.listen(3000,function (err) {
-  if(!err) console.log('ok')
+app.listen(3000, function (err) {
+  if (!err) console.log('ok')
   else console.log(err)
 })

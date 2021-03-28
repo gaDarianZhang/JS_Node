@@ -285,5 +285,5 @@
 }
 ```
 
-- 常见问题
-    - 
+- 注意：
+    - <span style="color:orange;">回调函数内的err和data参数，由内容的话就是内容，没内容的话是null。</span>
