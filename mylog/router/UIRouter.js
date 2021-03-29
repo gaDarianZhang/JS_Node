@@ -5,10 +5,17 @@ let router = new Router();
 
 router.get("/login",function (req,res) {  
     // console.log(path.resolve(__dirname,"../static/login.html"));
-    res.sendFile(path.resolve(__dirname,"../static/login.html"));
+    const {email} = req.query;
+    res.render("login",{errMsg:{email}});
 })
 router.get("/register",function (req,res) {  
-    res.sendFile(path.resolve(__dirname,"../static/register.html"));
+    res.render("register",{errMsg:{}});
+})
+
+router.get("/userCenter",function (req,res) {  
+    let {nick_name} = req.query;
+
+    res.render("userCenter",{nickName:nick_name});
 })
 
 

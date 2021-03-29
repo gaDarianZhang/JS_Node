@@ -10,7 +10,7 @@ app.disable('x-powered-by')
 app.use(express.static(__dirname+'/public'))
 //配置模板引擎
 app.set('view engine','ejs')
-app.set('views',path.join(__dirname+'/views'))
+app.set('views',path.join(__dirname,'/views'))
 //引入db模块，用于连接数据库
 const db = require('./db/db')
 //使用内置中间件用于解析post请求的urlencoded参数

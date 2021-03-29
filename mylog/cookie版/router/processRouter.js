@@ -4,6 +4,7 @@ let usersModel = require("../model/usersModel.js");
 
 
 
+
 router.post("/register", function (req, res) {
     const { email, nick_name, password, re_password } = req.body;
     const emailReg = /^[0-9a-zA-Z_]{5,20}@[a-z0-9]{2,6}\.(com|cn)$/;
@@ -76,10 +77,10 @@ router.post("/login", function (req, res) {
         }
         if (data) {
             console.log(`邮箱为${email}的用户登录成功`);
-            //如果这里直接render("userCenter")的话，可以加载出userCenter的画面，
-            //但是网址栏还是login，这个render只是把指定页面内容渲染到本页。
-            //所以，这样直接重定向到userCenter，这样就要经过UI路由
-            res.redirect(`http://localhost:3000/userCenter?nick_name=${data.nick_name}`);
+            res.cookie("_id",data._id.toString(),{maxAge:1000*60});
+            // console.log(data._id,typeof data._id);
+            
+            res.redirect(`http://localhost:3000/userCenter`);
             // res.send("redirect后的send");Cannot set headers after they are sent to the client
             return;
         }

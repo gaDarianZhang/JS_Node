@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>register</title>
+    <style>
+        .err{
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <span class="err"><%=errMsg.netErr%></span>
+    <form action="http://127.0.0.1:3000/register" method="POST">       
+        邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：<input type="email" name="email"><sapn class="err"><%=errMsg.emailErr%></sapn><br><br>
+        昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称：<input type="text" name="nick_name"><sapn class="err"><%=errMsg.nickErr%></sapn><br><br>
+        密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：<input type="password" name="password"><sapn class="err"><%=errMsg.passwordErr%></sapn><br><br>
+        重复密码：<input type="password" name="re_password"><sapn class="err"><%=errMsg.rePasswordErr%></sapn><br><br>
+        <input type="submit" value="注册">
+    </form>
+</body>
+
+</html>
