@@ -8,13 +8,18 @@ router.post("/register",function (req,res) {
     const emailReg = /^[0-9a-zA-Z_]{5,20}@[a-z0-9]{2,6}\.(com|cn)$/;
     const nickNameReg = /^[0-9A-Za-z_]{1}\w+/;
     const passwordReg = /[A-Za-z0-9.,@#$&*]{6,20}/;
+    let errMsg = {};
     if (!emailReg.test(email)) {
+        errMsg.email = "输入的邮箱不合法";
         res.send("请输入合法的邮箱地址");
-    }else if (!nickNameReg.test(nick_name)) {
+    }
+    if (!nickNameReg.test(nick_name)) {
         res.send("昵称格式不合法");
-    }else if(!passwordReg.test(password)){
+    }
+    if(!passwordReg.test(password)){
         res.send("密码格式不合法");
-    }else if(password !== re_password){
+    }
+    if(password !== re_password){
         res.send("两次输入密码不一致");
     }else{
         usersModel.findOne({email:email},function (err,data) {
