@@ -22,6 +22,9 @@ router.get('/register',(req,res)=>{
   res.sendFile(url)
 })
 
+
+//这里命名可以直接一个module.exports = router;
+//后边这个router要当做中间件来使用，而中间件的一个普遍共识就是它是一个函数。
 module.exports = function () {
   return router
 }

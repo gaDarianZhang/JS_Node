@@ -1,10 +1,11 @@
 const express = require('express')
 
 const app = express()
+let path = require("path")
 //让你的服务器知道你在用哪一个模板引擎-----配置模板引擎
 app.set('view engine','ejs')
 //让你的服务器知道你的模板在哪个目录下，配置模板目录
-app.set('views','./haha')
+app.set('views',path.resolve(__dirname+'/haha'))
 
 //如果在express中基于Node搭建的服务器，使用ejs无需引入。
 app.get('/show',function (request,response) {

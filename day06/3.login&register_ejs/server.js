@@ -2,13 +2,15 @@
 const express = require('express')
 //创建app应用对象
 const app = express()
+
+let path = require("path");
 //禁止服务器返回X-Powered-By,为了安全
 app.disable('x-powered-by')
 //使用内置中间件暴露静态资源，不访问路由直接写文件名+后缀也能看页面
 app.use(express.static(__dirname+'/public'))
 //配置模板引擎
 app.set('view engine','ejs')
-app.set('views','./views')
+app.set('views',path.join(__dirname+'/views'))
 //引入db模块，用于连接数据库
 const db = require('./db/db')
 //使用内置中间件用于解析post请求的urlencoded参数
