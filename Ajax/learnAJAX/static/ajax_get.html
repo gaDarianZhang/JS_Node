@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ajax_get</title>
+</head>
+
+<body>
+    <h1>原生ajax发送get请求测试</h1>
+    <input id="btn1" type="button" value="点击发送ajax的get请求">
+    <div class="box1"></div>
+    <script type="text/javascript">
+        let btn = document.getElementById("btn1");
+        btn1.onclick = function (event) {
+            let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {  
+                if(xhr.readyState==4&&xhr.status==200){
+                    console.log(xhr.response);
+                    let box1 = document.querySelector(".box1");
+                    box1.innerHTML = xhr.response;
+                }
+            }
+            xhr.open("get","http://localhost:3000/ajax_get?name=zhangsan&age=11");
+            xhr.send();
+        }
+    </script>
+</body>
+
+</html>
