@@ -16,8 +16,9 @@ router.get("/register",function (req,res) {
 })
 
 router.get("/userCenter",function (req,res) {  
-    let {_id} = req.cookies;
+    // let {_id} = req.cookies;
     // console.log(_id,typeof _id);
+    let {_id} = req.session;
     
     //有cookie
     if (_id) {

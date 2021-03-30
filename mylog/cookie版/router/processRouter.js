@@ -1,6 +1,7 @@
 let { Router } = require("express");
 let router = new Router();
 let usersModel = require("../model/usersModel.js");
+let md5 = require("md5");
 
 
 
@@ -36,7 +37,7 @@ router.post("/register", function (req, res) {
             return;
         }
         //达到注册条件，开始注册
-        usersModel.create({ email, nick_name, password }, function (err, data) {
+        usersModel.create({ email, nick_name, password:md5(password) }, function (err, data) {
             //注册失败
             if (!data) {
                 console.log(`邮箱为${email}的用户注册失败了,因为服务器错误`, err);
@@ -68,7 +69,7 @@ router.post("/login", function (req, res) {
         return;
     }
     //邮箱和密码格式合法
-    usersModel.findOne({ email, password }, (err, data) => {
+    usersModel.findOne({ email, password:md5(password) }, (err, data) => {
         if (err) {
             console.log("服务器出现错误",err);
             errMsg.netErr = "您的网络不稳定，请稍后重试";
@@ -77,8 +78,8 @@ router.post("/login", function (req, res) {
         }
         if (data) {
             console.log(`邮箱为${email}的用户登录成功`);
-            res.cookie("_id",data._id.toString(),{maxAge:1000*60});
-            // console.log(data._id,typeof data._id);
+            // res.cookie("_id",data._id.toString(),{maxAge:1000*60});
+            req.session._id = data._id.toString();
             
             res.redirect(`http://localhost:3000/userCenter`);
             // res.send("redirect后的send");Cannot set headers after they are sent to the client

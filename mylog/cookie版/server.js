@@ -2,14 +2,35 @@
 let express = require("express");
 let app = express();
 let path = require("path");
-//引入模块
 
+let session = require("express-session");
+let mongoSession = require("connect-mongo")(session);
+
+//引入模块
 let connectDb = require("./db/db");
 let UIRouter = require("./router/UIRouter");
 let processRouter = require("./router/processRouter");
+
+
+
 app.set("view engine","ejs");
 app.set("views",path.resolve(__dirname,"./views"));
 app.disable("x-powered-by");
+app.use(session({
+    name:"sessionKey",
+    secret:"unsecure",
+    saveUninitialized:false,
+    resave:false,
+    store:new mongoSession({
+        url:"mongodb://localhost:27017/session_container",
+        touchAfter:3600
+    }),
+    cookie:{
+        maxAge:1000*60,
+        httpOnly:true
+    }
+}));
+
 
 //服务器监听端口，并判断启动是否成功
 app.listen(3000,function (err) { 

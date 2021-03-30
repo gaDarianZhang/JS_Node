@@ -28,7 +28,8 @@ const MongoStore = require('connect-mongo')(session);
 
 app.use(session({
   name: 'peiqi',   //返回给客户端cookie的key。
-  secret: 'atguigu', //参与加密的字符串（又称签名）
+  secret: 'atguigu', //参与加密的字符串（又称签名）:返回给客户端cookie的key对应的value（经过处理的）。
+                    //也就是session会话存储空间的id。但是怎么保证不同客户端这个value不同呢？？？？？
   saveUninitialized: false, //是否在存储内容之前创建session会话
   resave: true ,//是否在每次请求时，强制重新保存session，即使他们没有变化（比较保险）
   store: new MongoStore({

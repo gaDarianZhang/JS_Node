@@ -25,7 +25,7 @@ router.get('/register',(req,res)=>{
 
 //用于展示个人中心界面的路由，无其他任何逻辑 ----- UI路由
 router.get('/user_center',(req,res)=>{
-  //1.获取客户端通过cookie携带过来的session编号
+  //1.读取客户端请求中包含的cookie，获取携带过来的session编号（id）
   //2.根据session编号匹配session容器
   //3.若匹配上：拿到session容器里的数据，去使用
   //4.若未匹配上：驳回，去登录
