@@ -48,7 +48,7 @@
     //当省份选择框变化时：1.获取所选省份编码  2.发请求
     $province.change(function () {
       //1.获取所选省份编码
-      let province = this.value
+      let province = this.value;//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!`
       $city.html('<option value="">请选择市</option>')
       $county.html('<option value=>请选择区/县</option>')
       if(!province){
@@ -72,8 +72,8 @@
     //当市选择框变化时：1.获取所选省份编码和市编码  2.发请求
     $city.change(function () {
       //1.获取所选省份编码和市编码
-      let city = this.value
-      let province = $province.val()
+      let city = this.value;//DOM对象!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      let province = $province.val();//JQuery对象!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       $county.html(' <option value=>请选择区/县</option>')
       if(!city){
         return

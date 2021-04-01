@@ -32,8 +32,9 @@
     })*/
 
     //使用jQuery发送ajax-get请求------简写
-    $.get('http://localhost:3000/ajax_get',{name:'kobe',age:41},(data)=>{
-      console.log(data)
+    $.get('http://localhost:3000/ajax_get',{name:'kobe',age:41},(data,textStatus,jqXHR)=>{
+      console.log(data);
+      console.log(jqXHR);//就是原生ajax里边的xhr
     })
   })
   

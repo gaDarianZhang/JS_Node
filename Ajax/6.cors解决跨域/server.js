@@ -4,8 +4,12 @@ let app = express()
 app.use(express.static(__dirname+'/public'))
 
 app.get('/test',function (req,res) {
-  let personArr = [{name:'peiqi',age:12},{name:'suxi',age:16}]
-  res.setHeader('Access-Control-Allow-Origin','http://localhost:63348')
+  let personArr = [{name:'peiqi',age:12},{name:'suxi',age:16}];
+  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  //不仅可以解决get的跨域问题，CORS任何请求的跨域问题都能解决。
+  //但下面这种就只能解决get post和head这三种简单请求。
+  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  res.setHeader('Access-Control-Allow-Origin','http://localhost:63348');
   res.send(personArr)
 })
 

@@ -1,7 +1,7 @@
 let express = require('express')
 
 let app = express()
-//用于解析post请求请求体参数---参数的编码类型必须为：
+//用于解析post请求请求体参数---参数的编码类型必须为：urlencoded
 app.use(express.urlencoded({extended:true}))
 
 //暴露静态资源

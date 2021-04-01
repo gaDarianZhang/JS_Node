@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>get</title>
+</head>
+<body>
+<h1>取消上一次请求测试</h1>
+<input type="button" class="btn" value="点击发送get请求并获取验证码"><br>
+<input type="text" id="autoCode" value="waiting">
+<script type="text/javascript">
+    let btn = document.querySelector(".btn");
+    let inp = document.getElementById("autoCode");
+    let lastXhr = null;
+    btn.onclick = ()=>{
+        if (lastXhr) {
+            lastXhr.abort();
+        }
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = ()=>{
+            if (xhr.readyState==1) {
+                console.log("我还没发send呢");
+            }
+            if (xhr.readyState == 2) {
+                console.log(Date.now());
+                console.log("我已经发送了获取验证码请求了");
+            }
+            if (xhr.readyState == 4) {
+                inp.value = xhr.response;
+            }
+        }
+        xhr.open("get","http://localhost:3000/cancel");
+        xhr.send();
+        lastXhr = xhr;
+    }
+</script>
+</body>
+</html>

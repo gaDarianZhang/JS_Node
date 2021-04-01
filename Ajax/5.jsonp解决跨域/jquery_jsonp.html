@@ -16,7 +16,11 @@
     4.将节点插入页面
     备注：以上所有步骤，都由jquery底层全部完成
   * */
-  
+  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  //这里的疑惑点在于，我自己连函数都没定义呀，jQuery怎么知道我需要定义一个什么样的函数交给后端来执行呢？
+  //前后端交互其实就是前端从后端取回需要的数据，那么这个函数的作用就很简单，就是从后端拿回数据，就好比一个简单的传入数据然后return回来。
+  //那么jQuery封装的ajax就是自动给定义了一个名字为callback的函数（这个函数），并且在返回给前端执行之后，把return结果设置为responseJSON
+  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   $('#btn').click(function () {
     //完整写法
     $.ajax({
@@ -24,15 +28,16 @@
       method:'get',
       dataType:'jsonp', //该属性，控制了上面的4步
       data:{name:'zhangsan',age:18},
-      success:function (result) {
-        console.log(result)
+      success:function (result,statusText,XHR) {
+        console.log(result);
+        console.log(statusText,XHR);
       },
       error:function (err) {
         console.log(err)
       }
     })
     
-    //精简写法
+    //精简写法:注意要自己再url中加上“?callback=?”
     /*$.getJSON('http://localhost:3000/test?callback=?',{name:'zhangsan',age:18},function (data) {
       console.log(data)
     })*/
