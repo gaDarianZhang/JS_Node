@@ -1,17 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport"
-    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>index</title>
-<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<style>
-    
-</style>
-</head>
-<body>
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>index</title>
+    <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .label{
+            display: inline-block;
+            width: 90px;
+            line-height: 30px;
+            margin-bottom: 10px;
+            border: 1px solid blanchedalmond;
+            background-color: rebeccapurple;
+            text-align-last: justify;
+            box-shadow: 0 0 5px 3px;
+
+        }
+        select{
+            outline: none;
+            width: 100px;
+            height: 30px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <span class="label">省份：</span>
+    <select name="province" id="province">
+        <option value="">请选择省份</option>
+    </select>
+    <br>
+    <span class="label">市：</span>
+    <select name="city" id="city">
+        <option value="">请选择市</option>
+    </select>
+    <br>
+    <span class="label">区/县：</span>
+    <select name="county" id="county">
+        <option value="">请选择区县</option>
+    </select>
+
+    <script type="text/javascript">
+
+
+        let $province = $("#province");
+        let $city = $("#city");
+        let $county = $("#county");
+        $(()=>{
+            $.get("http://localhost:3000/get_all_provinces",function (result) {  
+                let {status,data,err} = result;
+                if (status === 1) {
+                    let str = "";
+                    data.forEach(item => {
+                        str += `<option value="${item.province}">${item.name}</option>`;
+                    });
+                    $province.append(str);
+                }else{
+                    console.log(err);
+                }
+            });
+            $province.change(function () {  
+                $city.html("<option value=''>请选择市</option>");
+                $county.html("<option value=''>请选择区县</option>");
+                let province = this.value;
+                if (!province) {
+                    return;
+                }
+                $.get("http://localhost:3000/get_cities_of_province",{province},function (result) {  
+                    let {status,data,err} = result;
+                    if (status===1) {
+                        let str = "";
+                        data.forEach(item => {
+                            str += `<option value="${item.city}">${item.name}</option>`
+                        });
+                        $city.append(str);
+                    }else{
+                        console.log(err);
+                    }
+                });
+            });
+            $city.change(function () {  
+                $county.html("<option value=''>请选择区县</option>");
+                let province = $province.val();
+                let city = this.value;
+                console.log(province,city);
+                if (!city) {
+                    return;
+                }
+                $.get("http://localhost:3000/get_counties_of_city",{province,city},function (result) {  
+                    let {status,data,err} = result;
+                    if (status === 1) {
+                        let str = "";
+                        data.forEach(item => {
+                            str += `<option value="${item.county}">${item.name}</option>`;
+                        });
+                        $county.append(str);
+                    }else{
+                        return(err);
+                    }
+                });
+            }); 
+        });
+    </script>
 </body>
+
 </html>
