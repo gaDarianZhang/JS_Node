@@ -6,28 +6,30 @@
 
 二、【安装】：(安装之前必须保证文件夹内有package.json，且里面的内容格式合法)
 
-    1.npm install xxxxx --save   或   npm i xxxx -S   或   npm i xxxx
-        备注：
-        (1).局部安装完的第三方包，放在当前目录中node_modules这个文件夹里
-        (2).安装完毕会自动产生一个package-lock.json(npm版本在5以后才有)，里面缓存的是每个下载过的包的地址，目的是下次安装时速度快一些。
-        (3).当安装完一个包，该包的名字会自动写入到package.json中的【dependencies(生产依赖)】里。npm5及之前版本要加上--save后缀才可以。
-    
-    2.npm install xxxxx --save-dev  或  npm i xxxxx -D  安装包并将该包写入到【devDependencies(开发依赖中)】
+1. `npm install xxxxx --save   或   npm i xxxx -S   或   npm i xxxx`
+
+    备注：
+    (1).局部安装完的第三方包，放在当前目录中node_modules这个文件夹里
+    (2).安装完毕会自动产生一个package-lock.json(npm版本在5以后才有)，里面缓存的是每个下载过的包的地址，目的是下次安装时速度快一些。
+    (3).当安装完一个包，该包的名字会自动写入到package.json中的【dependencies(生产依赖)】里。npm5及之前版本要加上--save后缀才可以。
+
+2. `npm install xxxxx --save-dev  或  npm i xxxxx -D  安装包并将该包写入到【devDependencies(开发依赖中)】`
     	备注：什么是生产依赖与开发依赖？
         1.只在开发时(写代码时)时才用到的库，就是开发依赖 ----- 例如：语法检查、压缩代码、扩展css前缀的包。
         2.在生产环境中(项目上线)不可缺少的，就是生产依赖 ------ 例如：jquery、bootStrap等等。
         3.注意：某些包即属于开发依赖，又属于生产依赖 -------例如：jquery。
-    
-    3.npm i xxxx -g  全局安装xxxx包（一般来说，带有指令集的包要进行全局安装，例如：browserify、babel等）
-        全局安装的包，其指令到处可用，如果该包不带有指令，就无需全局安装。
-        查看全局安装的位置：npm root -g
-    
-    4.npm i xxx@yyy :安装xxx包的yyy版本
-    
-    5.npm i ：安装package.json中声明的所有包
+
+3. `npm i xxxx -g  全局安装xxxx包`
+    1. （一般来说，<span style="color:red;">带有指令集的包要进行全局安装，例如：browserify、babel等</span>）
+            <span style="color:red;">全局安装的包，其指令到处可用(只是它的指令到处可用，并不能直接require)</span>，如果该包不带有指令，就无需全局安装。
+4. `npm root -g`查看全局安装的位置
+
+5. `npm i xxx@yyy `:安装xxx包的yyy版本
+
+6. `npm i `：安装package.json中声明的所有包
 
 三、【移除】：
-      npm remove xxxxx  在node_module中删除xxxx包，同时会删除该包在package.json中的声明
+      `npm remove xxxxx`  在node_module中删除xxxx包，同时会删除该包在package.json中的声明
 
 四、【其他命令】：
 	1.npm aduit fix :检测项目依赖中的一些问题，并且尝试着修复。
@@ -47,9 +49,9 @@
 ​	8.npm root -g：查看全局模块的安装位置
 
  五、【关于版本号的说明】：
-      "^3.x.x" ：锁定大版本，以后安装包的时候，保证包是3.x.x版本，x默认取最新的。
-      "~3.1.x" ：锁定小版本，以后安装包的时候，保证包是3.1.x版本，x默认取最新的。
-      "3.1.1" ：锁定完整版本，以后安装包的时候，保证包必须是3.1.1版本。
+      <span style="color:red;">"^3.x.x" ：锁定大版本，以后安装包的时候，保证包是3.x.x版本，x默认取最新的。</span>
+     <span style="color:red;"> "~3.1.x" ：锁定小版本，以后安装包的时候，保证包是3.1.x版本，x默认取最新的。</span>
+      <span style="color:red;">"3.1.1" ：锁定完整版本，以后安装包的时候，保证包必须是3.1.1版本。</span>
 
 
 
