@@ -36,9 +36,11 @@
 
 ​	2.npm view xxxxx versions :查看远程npm仓库中xxxx包的所有版本信息
 
-​	3.npm view xxxxx version :查看npm仓库中xxxx包的最新版本。
+​	3.npm view xxxxx version :查看npm远程仓库中xxxx包的最新版本。
 
 ​	4.npm ls xxxx :查看我们所安装的xxxx包的版本，<span style="color:red;font-weight:bold">不要被package.json里边的版本号给坑了。</span>
+
+​	npm info xxx：查看看某包的详细信息
 
 ​	5.npm list：查看所有已安装的 npm 软件包（包括它们的依赖包）的最新版本
 

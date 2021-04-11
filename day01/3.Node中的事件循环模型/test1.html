@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>test1</title>
+</head>
+
+<body>
+  <script type="text/javascript">
+    console.log('start')
+    setTimeout(() => {
+      console.log('timer1')
+      Promise.resolve().then(function () {
+        console.log('promise1')
+      })
+    }, 0)
+    setTimeout(() => {
+      console.log('timer2')
+      Promise.resolve().then(function () {
+        console.log('promise2')
+      })
+    }, 0)
+    Promise.resolve().then(function () {
+      console.log('promise3')
+    })
+    console.log('end')
+    //start=>end=>promise3=>timer1=>timer2=>promise1=>promise2
+  </script>
+</body>
+
+</html>
