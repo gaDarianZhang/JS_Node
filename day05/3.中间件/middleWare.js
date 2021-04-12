@@ -44,7 +44,7 @@ const app = express()
 //1.【第一种】使用应用级(全局)中间件------所有请求的第一扇门-------所有请求都要经过某些处理的时候用此种写法
 /*app.use((request,response,next)=>{
   //response.send('我是中间件给你的响应')
-  //request.test = 1 //修改请求对象
+  //request.test = 1 //修改请求对象!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   //图片防盗链
   if(request.get('Referer')){
     let miniReferer = request.get('Referer').split('/')[2]

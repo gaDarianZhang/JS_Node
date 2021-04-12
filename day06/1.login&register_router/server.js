@@ -6,10 +6,10 @@ const app = express()
 app.disable('x-powered-by')
 //使用内置中间件暴露静态资源，不访问路由直接写文件名+后缀也能看页面
 app.use(express.static(__dirname+'/public'))
-//引入db模块，用于连接数据库
-const db = require('./db/db')
 //使用内置中间件用于解析post请求的urlencoded参数
 app.use(express.urlencoded({extended:true}))
+//引入db模块，用于连接数据库
+const db = require('./db/db')
 //引入UI路由器
 const UIRouter = require('./router/UIRouter')
 //引入登录注册路由器

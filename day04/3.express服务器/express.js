@@ -26,6 +26,7 @@ app.get('/', function (request, response) {
   console.log(request.url)
   console.log(request.params);//拿到参数路由的参数，是一个对象,在这里就是空的了
   console.log(request.get("Cache-Control"));
+  response.status(200);
   response.send('ok')
 })
 

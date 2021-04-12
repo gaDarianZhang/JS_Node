@@ -28,5 +28,5 @@ function connectMongo(success,failed) {
   })
 }
 
-exports.connectDb = connectMongo;
+module.exports = connectMongo;
 

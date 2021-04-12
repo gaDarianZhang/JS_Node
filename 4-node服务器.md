@@ -18,8 +18,8 @@
 - 能发出get请求的不详尽总结：
     - form（可get 可post）
     - ajax（可get 可post）
-    - 浏览器地址栏(只能post)
-    - img link scris等html中能访问外部资源的标签(只能post)
+    - 浏览器地址栏(只能get)
+    - img link scris等html中能访问外部资源的标签(只能get)
 
 ### POST
 

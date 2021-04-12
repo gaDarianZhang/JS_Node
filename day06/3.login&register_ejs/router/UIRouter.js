@@ -14,6 +14,7 @@ let {resolve} = require('path')
 //用于展示登录界面的路由，无其他任何逻辑 ----- UI路由
 router.get('/login',(req,res)=>{
   const {email} = req.query
+  console.log(email);
   res.render('login',{errMsg:{email}});//用于注册成功后跳转到登陆页面，默认填入刚才的email！！！！
 })
 
