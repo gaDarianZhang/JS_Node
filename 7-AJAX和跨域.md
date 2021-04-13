@@ -19,8 +19,16 @@
 - AJAX-post:
     - urlencoded：加一个特殊的请求头
     - json:
-
-
+- xhr.readyState:
+    - 0:xhr对象在实例化出来的那一刻，就已经是0状态，代表着xhr是初始化状态。
+    - 1:send方法还没有被调用，即：请求没有发出去，此时依然可以修改请求头。
+    - 2:send方法被调用了，即：请求已经发出去了，此时已经不可以再修改请求头。！！！！<span style="color:red">貌似是服务器端已经作出回复，并不是说请求发出去后就是状态2</span>！！！！
+    - 3:已经回来一部分数据了，如果是比较小的数据，会在此阶段一次性接收完毕,较大数据，有待于进一步接收。
+    - 4:数据完美的回来了。
+- xhr.abort()
+    - 如果来得及（浏览器端根本没发出请求），半路取消，请求根本没有到达服务器。
+    - 如果来不及（浏览器端已经发出了请求了），拒之门外，请求已经到达了服务器，且服务器已经给出响应。
+    - 也存在根本不起作用的情况(服务器的返回已经收到，abort没用了)。
 
 ## 跨域问题
 
@@ -58,11 +66,22 @@
 
 ### 3.非同源受到哪些限制？即：跨域了你不能干那些事情
 
-			1. <span style="color:orange;">**Cookie不能读取；**</span>
-   			2. <span style="color:orange;">**DOM无法获得；**</span>
-   			3. <span style="color:orange;">**Ajax请求不能获取数据**</span>
+1. <span style="color:orange;">**Cookie不能读取；**</span>
+
+   2. <span style="color:orange;">**DOM无法获得；**</span>
+   3. <span style="color:orange;">**Ajax请求不能获取数据**</span>
 
 #### 为什么form表单跨域不拦截
+
+> 浏览器的策略本质是：一个域名下面的JS，没有经过允许是不能读取另外一个域名的内容，但是浏览器不阻止你向另外一个域名发送请求。
+>
+> 所以form表单提交没有跨域问题，提交form表单到另外一个域名，原来页面是无法获取新页面的内容，或者说form提交后不需要返回，但是ajax是需要返回的。
+>
+> 而ajax是想要读取响应内容，浏览器是不允许你这么做的。
+>
+> 世界本无跨域，是浏览器不允许js访问别的域，但是浏览器却没有限制自己，img标签和script标签都是可以加载其他域的图片或者js文件。这不就是jsonp的跨域嘛，利用浏览器的历史兼容性。
+>
+> 浏览器的安全策略限制的是js脚本，并不限制src，form表单提交之类的请求。就是说form表单提交不存在安全问题，ajax提交跨域存在安全问题。
 
 - <span style="color:orange;">发送的ajax请求走的是浏览器的ajax引擎，严格遵守同源策略。</span>
 - <span style="color:orange;">form表单发出的请求走的不是ajax引擎，是浏览器的其他模块，不受同源策略限制。</span>
@@ -71,17 +90,25 @@
 
 ### 4.如何在开发中解决跨域问题：
 
-**1.JSONP解决发送请求跨域问题：**
+**1.JSONP解决发送请求跨域问题： <span style="color:skyblue">json with padding</span>**
 
 > 要明确的是：JSONP不是一种技术，而是程序员“智慧的结晶”（利用了标签请求资源不受同源策略限制的特点）
 > JSONP需要前后端人员互相配合。
 
 前端页面写法：
 
-```html
-	<body>
-	  <button id="btn">按钮</button>
-	  <script type="text/javascript">
+- 1. 在全局作用域定义一个函数，函数作用就是传入一个参数，然后函数体内就是对这个参数的操作
+
+- 2. 在DOM中添加一个script标签，url中以查询字符串形式带上前一步定义的这个函数名。
+
+- 3. 在服务器端取出url中的函数名，把这次请求需要的数据放在一个对象data内，并res.send一段字符串:
+
+        ```js
+        (`${functionName}(${JSON.stringfy(data)})`)
+        ```
+
+```js
+
 	    var btn = document.getElementById('btn');
 	    btn.onclick = function () {
 	      //1. 创建一个script标签
@@ -97,8 +124,30 @@
 	      //5.不影响整体DOM结构，删除script标签
 	      document.body.removeChild(script);
 	    }
-	  </script>
-	</body>
+
+
+
+//jQuery写法
+//完整写法
+    // $.ajax({
+    //   url:'http://localhost:3000/test',
+    //   method:'get',
+    //   dataType:'jsonp', //该属性，控制了上面的4步
+    //   data:{name:'zhangsan',age:18},
+    //   success:function (result,statusText,XHR) {
+    //     console.log(result);
+    //     console.log(statusText,XHR);
+    //   },
+    //   error:function (err) {
+    //     console.log(err)
+    //   }
+    // })
+    
+    //精简写法:注意要自己再url中加上“?callback=?”
+    $.getJSON('http://localhost:3000/test?callback=?',{name:'zhangsan',age:18},function (data,textStatus,xhr) {
+      console.log(data);
+      console.log(textStatus,xhr);
+    })
 ```
 
 后端写法：
@@ -113,11 +162,11 @@ app.get('/jsonp', (req, res) => {
 })
 ```
 
-**2.后台配置cors解决跨域**
+**2.后台配置cors解决跨域 <span style="color:skyblue">cross-origin resource share</span>**
 
 ```js
-以Node为例：
-res.set('Access-Control-Allow-Origin', 'http://localhost:63342');
+以Node为例：只能解决get post head请求
+res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
 ```
 
 **3.使用代理服务器**

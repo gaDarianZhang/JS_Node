@@ -14,7 +14,7 @@ router.post('/register',(req,res)=>{
   /*
    { email: 'kobe@qq.com',
      nick_name: 'kobe',
-     password: '123',
+     password: '123',web
      re_password: '123' }
  */
   //1.获取用户的输入

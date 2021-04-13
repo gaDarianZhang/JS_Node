@@ -23,24 +23,25 @@
   //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   $('#btn').click(function () {
     //完整写法
-    $.ajax({
-      url:'http://localhost:3000/test',
-      method:'get',
-      dataType:'jsonp', //该属性，控制了上面的4步
-      data:{name:'zhangsan',age:18},
-      success:function (result,statusText,XHR) {
-        console.log(result);
-        console.log(statusText,XHR);
-      },
-      error:function (err) {
-        console.log(err)
-      }
-    })
+    // $.ajax({
+    //   url:'http://localhost:3000/test',
+    //   method:'get',
+    //   dataType:'jsonp', //该属性，控制了上面的4步
+    //   data:{name:'zhangsan',age:18},
+    //   success:function (result,statusText,XHR) {
+    //     console.log(result);
+    //     console.log(statusText,XHR);
+    //   },
+    //   error:function (err) {
+    //     console.log(err)
+    //   }
+    // })
     
     //精简写法:注意要自己再url中加上“?callback=?”
-    /*$.getJSON('http://localhost:3000/test?callback=?',{name:'zhangsan',age:18},function (data) {
-      console.log(data)
-    })*/
+    $.getJSON('http://localhost:3000/test?callback=?',{name:'zhangsan',age:18},function (data,textStatus,xhr) {
+      console.log(data);
+      console.log(textStatus,xhr);
+    })
   })
 </script>
 
