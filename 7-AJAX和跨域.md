@@ -68,8 +68,8 @@
 
 1. <span style="color:orange;">**Cookie不能读取；**</span>
 
-   2. <span style="color:orange;">**DOM无法获得；**</span>
-   3. <span style="color:orange;">**Ajax请求不能获取数据**</span>
+2. <span style="color:orange;">**DOM无法获得；**</span>
+3. <span style="color:orange;">**Ajax请求不能获取数据**</span>
 
 #### 为什么form表单跨域不拦截
 
@@ -166,6 +166,8 @@ app.get('/jsonp', (req, res) => {
 
 ```js
 以Node为例：只能解决get post head请求
+//不仅可以解决get的跨域问题，CORS任何请求的跨域问题都能解决。
+//但下面这种就只能解决get post和head这三种简单请求。
 res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
 ```
 

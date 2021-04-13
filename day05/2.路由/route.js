@@ -75,6 +75,11 @@ app.get('/meishi/:id', function (request, response) {
   let { id } = request.params
   response.send(`我是变化为${id}的商家`)
 })
+app.get('/yifu/:location', function (request, response) {
+  console.log(request.params);
+  let id = request.params.location
+  response.send(`我是位置为为${id}的商家`)
+})
 
 
 app.listen(3000, function (err) {
