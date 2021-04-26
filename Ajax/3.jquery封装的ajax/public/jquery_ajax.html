@@ -17,19 +17,19 @@
   btn1.click(function () {
     
     //使用jQuery发送ajax-get请求------完整版写法
-    /*$.ajax({
+    $.ajax({
       url:'http://localhost:3000/ajax_get',
       method:'get', //发送请求的方式
       data:{name:'kobe',age:41}, //发送请求携带的数据
       //成功的回调
-      success:function (result) {
+      success:function (result,statusText,jqXHR) {
         console.log(result)
       },
       //失败的回调
       error:function (err) {
         console.log(err)
       }
-    })*/
+    }) 
 
     //使用jQuery发送ajax-get请求------简写
     $.get('http://localhost:3000/ajax_get',{name:'kobe',age:41},(data,textStatus,jqXHR)=>{
